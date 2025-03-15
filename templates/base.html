@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}Цвет-ИИ{% endblock %}</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+</head>
+<body>
+
+  <div class="parallax-bg"></div>
+
+  <nav class="navbar">
+    <div class="jost navbar-brand">Цвет-ИИ</div>
+
+    <div class="jost navbar-links desktop-only">
+      {% block desktop_nav_links %}
+      {% endblock %}
+    </div>
+
+    <div class="hamburger mobile-only">
+      &#9776;
+    </div>
+  </nav>
+
+  <div class="jost mobile-nav-panel">
+    <div class="mobile-nav-header">
+      <span class="close-btn">&times;</span>
+      <h3 style="color: #162883;">Меню</h3>
+    </div>
+    {% block mobile_nav_links %}
+    {% endblock %}
+  </div>
+
+  {% block content %}
+  {% endblock %}
+
+  <footer class="jost footer">
+    <p>© 2025 Все права защищены</p>
+  </footer>
+
+  <script>
+    const parallaxBg = document.querySelector('.parallax-bg');
+    window.addEventListener('scroll', () => {
+      const offset = window.pageYOffset;
+      parallaxBg.style.backgroundPositionY = 0 + 'px';
+    });
+
+    const hamburger = document.querySelector('.hamburger');
+    const mobileNavPanel = document.querySelector('.mobile-nav-panel');
+    const closeBtn = document.querySelector('.close-btn');
+
+    hamburger.addEventListener('click', () => {
+      mobileNavPanel.classList.add('open');
+    });
+    closeBtn.addEventListener('click', () => {
+      mobileNavPanel.classList.remove('open');
+    });
+  </script>
+
+  {% block extra_scripts %}{% endblock %}
+</body>
+</html>

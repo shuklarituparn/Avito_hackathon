@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block title %}Нейросеть по определению цвета{% endblock %}
+
+{% block desktop_nav_links %}
+  <a href="#features" class="nav-link">Особенности</a>
+  <a href="#about" class="nav-link">О Нас</a>
+  <a href="{{ url_for('model_page') }}" class="nav-button">Попробовать</a>
+{% endblock %}
+
+{% block mobile_nav_links %}
+  <a href="#features" class="nav-link">Особенности</a>
+  <a href="#about" class="nav-link">О Нас</a>
+  <a href="{{ url_for('model_page') }}" class="nav-button">Попробовать</a>
+{% endblock %}
+
+{% block content %}
+  <header class="jost hero-section">
+    <div class="hero-content">
+      <h1 class="jost-hero-title" lang="ru">Добро пожаловать в нашу нейросеть</h1>
+      <p class="jost-hero-subtitle justify-p" lang="ru">
+        Наш инструмент определяет цвет объекта на загруженном изображении<br/>
+        Модель EfficientNet-B3 лежит в основе анализа изображений
+      </p>
+      <a class="jost cta-button" href="{{ url_for('model_page') }}">Попробовать модель</a>
+    </div>
+  </header>
+
+  <section id="features" class="jost features-section">
+    <h2 lang="ru">Особенности Модели</h2>
+    <p class="justify-p" lang="ru">
+      Модель EfficientNet-B3 — это одна из самых известных архитектур для обработки изображений.
+      Благодаря ей мы можем быстро и точно определить цвет объекта.
+    </p>
+  </section>
+
+  <section id="about" class="jost about-section">
+    <h2 lang="ru">О Нас</h2>
+    <p class="justify-p" lang="ru">
+      Мы — студенты Московского физико-технического института "Физтех",
+      обучающиеся на третьем курсе по программе «Прикладная математика и информатика».
+      Объединив навыки веб-разработки и машинного обучения,
+      мы создали оригинальное решение задачи от Avito в рамках хакатона,
+      применяя современные подходы к анализу изображений.
+    </p>
+    <h2>Наша Команда</h2>
+    <div class="team-grid">
+      <div class="team-member">
+        <div class="team-photo">
+          <img src="{{ url_for('static', filename='images/aadi.jpg') }}" alt="Ритупарн Шукла">
+        </div>
+        <h3 class="team-name">Ритупарн Шукла</h3>
+        <p class="team-title">Тим Лид, Golang Разработчик @ Сбербанк-Технологии</p>
+        <a href="mailto:shukla.r@phystech.edu" class="team-contact">shukla.r@phystech.edu</a> <br>
+        <a href="https://shukla.ru" class="team-contact">Personal Website</a>
+      </div>
+      <div class="team-member">
+        <div class="team-photo">
+          <img src="{{ url_for('static', filename='images/tim.jpg') }}" alt="Тим Згейби">
+        </div>
+        <h3 class="team-name">Тим Згейби</h3>
+        <p class="team-title">Full-Stack Разработчик</p>
+        <a href="mailto:zgeibi.t@phystech.edu" class="team-contact">zgeibi.t@phystech.edu</a> <br>
+        <a href="https://timzgeybi.com" class="team-contact">Personal Website</a>
+
+      </div>
+
+      <div class="team-member">
+        <div class="team-photo">
+          <img src="{{ url_for('static', filename='images/guillermo.jpg') }}" alt="Гильермо Себастьян Тикона Пералес">
+        </div>
+        <h3 class="team-name">Гильермо Себастьян Тикона Пералес</h3>
+        <p class="team-title">Разработчик МО</p>
+        <a href="mailto:tikona.pg@phystech.edu" class="team-contact">tikona.pg@phystech.edu</a> <br/>
+        <a href="https://github.com/jodejode77" class="team-contact">Github</a>
+      </div>
+
+      <div class="team-member">
+        <div class="team-photo">
+          <img src="{{ url_for('static', filename='images/weshi.jpg') }}" alt="Дарвеши Гитон-Баптсит">
+        </div>
+        <h3 class="team-name">Дарвеши Гитон-Баптсит</h3>
+        <p class="team-title">Разработчик МО</p>
+        <a href="mailto:gyton.baptiste@phystech.edu" class="team-contact">gyton.baptiste@phystech.edu</a> <br>
+        <a href="https://github.com/DG-Baptiste" class="team-contact">Github</a>
+
+      </div>
+    </div>
+  </section>
+
+{% endblock %}

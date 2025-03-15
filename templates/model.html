@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block title %}Определение Цвета — Модель{% endblock %}
+
+{% block desktop_nav_links %}
+  <a href="{{ url_for('index') }}" class="nav-link">Главная</a>
+  <a href="#usage" class="nav-link">Инструкция</a>
+{% endblock %}
+
+{% block mobile_nav_links %}
+  <a href="{{ url_for('index') }}" class="nav-link">Главная</a>
+  <a href="#usage" class="nav-link">Инструкция</a>
+{% endblock %}
+
+{% block content %}
+<div class="model-container">
+  <div class="model">
+    <header class="jost model-header">
+      <h1>Определение Цвета</h1>
+      <p>Загрузите или перетащите изображение, чтобы узнать, какой цвет преобладает на нём.</p>
+    </header>
+
+    <section id="usage" class="jost model-section">
+      <form action="{{ url_for('model_page') }}" method="POST" enctype="multipart/form-data">
+        <div class="jost upload-box" id="drop-area" onclick="fileElem.click()">
+          <p id="upload-msg">Перетащите файл сюда или нажмите, чтобы выбрать</p>
+          <input type="file" name="image" id="fileElem" accept="image/*" required />
+        </div>
+
+        <button type="submit" class="jost submit-button">Отправить</button>
+      </form>
+
+      {% if color %}
+        <div class="jost result-box">
+          <h2>Результат:</h2>
+          <p>Определённый цвет: <strong>{{ color }}</strong></p>
+          <p style="text-wrap:inherit;">Топ 5 цветов: {{ color5 }}</p>
+        </div>
+        
+        
+      {% endif %}
+    </section>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+  let dropArea = document.getElementById('drop-area');
+  let fileElem = document.getElementById('fileElem');
+  let uploadMsg = document.getElementById('upload-msg');
+
+  ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+    dropArea.addEventListener(eventName, (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+    }, false);
+  });
+
+  ['dragenter', 'dragover'].forEach(eventName => {
+    dropArea.addEventListener(eventName, () => {
+      dropArea.classList.add('highlight');
+    }, false);
+  });
+
+  ['dragleave', 'drop'].forEach(eventName => {
+    dropArea.addEventListener(eventName, () => {
+      dropArea.classList.remove('highlight');
+    }, false);
+  });
+
+  dropArea.addEventListener('drop', (e) => {
+    let dt = e.dataTransfer;
+    let files = dt.files;
+    fileElem.files = files;
+    showFileSelected();
+  });
+
+  fileElem.addEventListener('change', showFileSelected);
+
+  function showFileSelected() {
+    if (fileElem.files && fileElem.files.length > 0) {
+      uploadMsg.textContent = "Файл выбран: " + fileElem.files[0].name;
+    } else {
+      uploadMsg.textContent = "Перетащите файл сюда или нажмите, чтобы выбрать";
+    }
+  }
+</script>
+{% endblock %}
